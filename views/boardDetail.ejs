@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= data.name %></title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .card-header {
+        background-color: #007bff;
+        color: white;
+        border-radius: 10px 10px 0 0;
+      }
+      .card-header h1 {
+        font-size: 1.75rem;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+      .card-text strong {
+        font-size: 1rem;
+        color: #343a40;
+      }
+      h1 {
+        text-align: center;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-header text-center">
+          <h1>
+            <%= data.name %>
+            <small class="text-light"><%= data.floor %>층</small>
+          </h1>
+        </div>
+        <div class="card-body">
+          <form id="editForm" action="/edit" method="post" class="mt-3">
+            <!-- UPDATE: 수정 페이지로 주입할 기존 데이터 -->
+            <input value="<%= data._id %>" name="_id" type="hidden" />
+            <input value="<%= data.name %>" name="name" type="hidden" />
+            <input value="<%= data.address %>" name="address" type="hidden" />
+            <input value="<%= data.floor %>" name="floor" type="hidden" />
+            <input value="<%= data.type %>" name="type" type="hidden" />
+            <input value="<%= data.deposit %>" name="deposit" type="hidden" />
+            <input value="<%= data.rent %>" name="rent" type="hidden" />
+            <input value="<%= data.usage %>" name="usage" type="hidden" />
+            <input value="<%= data.area %>" name="area" type="hidden" />
+            <input
+              value="<%= data.constructionYear %>"
+              name="constructionYear"
+              type="hidden"
+            />
+
+            <p class="card-text">
+              <strong>거래 유형:</strong> <%= data.type %><br />
+              <% if (data.type === "월세") { %>
+              <strong>보증금 / 월세:</strong> <%= data.deposit %> / <%=
+              data.rent %> <% } else if (data.type === "전세") { %>
+              <strong>보증금:</strong> <%= data.deposit %> <% } %>
+            </p>
+
+            <p class="card-text">
+              <strong>주소:</strong> 서울 <%= data.address %><br />
+              <strong>건축년도:</strong> <%= data.constructionYear %> 년도<br />
+              <strong>용도:</strong> <%= data.usage %><br />
+              <strong>면적:</strong> <%= data.area %> 평
+            </p>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">수정하기</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
